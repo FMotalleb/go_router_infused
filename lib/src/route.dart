@@ -54,7 +54,6 @@ class GoRouteInfused extends GoRoute {
   static Iterable<Provider> _generateProviders(
       List<GoMiddleware> middleWares, BuildContext context, GoRouterState state) sync* {
     for (final i in middleWares) {
-      // ignore: invalid_use_of_protected_member
       final provider = i.generateProvider(context, state);
       if (provider != null) {
         yield provider;
