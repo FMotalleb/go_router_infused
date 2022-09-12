@@ -4,10 +4,10 @@ import 'package:flutter/widgets.dart' show BuildContext;
 import 'package:go_router/go_router.dart' show GoRouterState;
 import 'package:provider/provider.dart' show Provider;
 
-import 'package:go_router_infused/src/middle_ware/middle_ware.dart' //
+import 'package:go_router_infused/src/middleware/middleware.dart' //
     show
         GoMiddleware;
-import 'package:go_router_infused/src/middle_ware/validation_result.dart' //
+import 'package:go_router_infused/src/middleware/validation_result.dart' //
     show
         MiddlewareValidationResult;
 

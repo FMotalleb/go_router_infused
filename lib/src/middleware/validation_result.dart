@@ -1,6 +1,6 @@
 library go_router_infused.middleware;
 
-import 'package:go_router_infused/src/middle_ware/middle_ware.dart' show GoMiddleware;
+import 'package:go_router_infused/src/middleware/middleware.dart' show GoMiddleware;
 
 class MiddlewareValidationResult {
   final String? message;
