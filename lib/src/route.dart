@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 library go_router_infused.route;
 
 import 'package:flutter/widgets.dart' show BuildContext, Widget;
@@ -23,6 +25,8 @@ class GoRouteInfused extends GoRoute {
   /// ```dart
   ///  context.read<`Provider Name`>()
   /// ```
+  ///
+  /// acts like normal [GoRoute] if no middleware provided.
   GoRouteInfused({
     required super.path,
     required Widget Function(BuildContext, GoRouterState) builder,
@@ -31,8 +35,17 @@ class GoRouteInfused extends GoRoute {
     super.name,
     super.pageBuilder,
     super.routes,
-    super.redirect,
+    String? Function(GoRouterState)? redirect,
   }) : super(
+          redirect: (state) {
+            for (final i in middlewares) {
+              final redirectResult = i.redirect(state);
+              if (redirectResult != null) {
+                return redirectResult;
+              }
+            }
+            return redirect?.call(state);
+          },
           builder: (context, state) {
             if (middlewares.isEmpty) {
               return builder(context, state);
@@ -51,8 +64,45 @@ class GoRouteInfused extends GoRoute {
           },
         );
 
+  /// alternatively instead of creating new route or migrating to
+  /// [GoRouteInfused] its possible to use [injectMiddle] to existing routes.
+  ///
+  /// @params:
+  /// - [route] : (GoRoute) => normal [GoRoute]
+  /// - [middlewares] : (List<GoMiddleware>)
+  /// - [newPath] : (String?) => new path for the route
+  /// - [testMiddlewareValidation] : (bool)
+  /// - [pathResolver] : (String Function(String)?) => regenerate path for the
+  ///   route
+  ///
+
+  factory GoRouteInfused.injectMiddle({
+    required GoRoute route,
+    required List<GoMiddleware> middlewares,
+    String? newPath,
+    String Function(String route)? pathResolver,
+    bool testMiddlewareValidation = true,
+  }) {
+    String path = newPath ?? route.path;
+    if (pathResolver != null) {
+      path = pathResolver(path);
+    }
+    return GoRouteInfused(
+      builder: route.builder,
+      path: path,
+      middlewares: middlewares,
+      name: route.name,
+      pageBuilder: route.pageBuilder,
+      redirect: route.redirect,
+      routes: route.routes,
+      testMiddlewareValidation: testMiddlewareValidation,
+    );
+  }
   static Iterable<Provider> _generateProviders(
-      List<GoMiddleware> middleWares, BuildContext context, GoRouterState state) sync* {
+    List<GoMiddleware> middleWares,
+    BuildContext context,
+    GoRouterState state,
+  ) sync* {
     for (final i in middleWares) {
       final provider = i.generateProvider(context, state);
       if (provider != null) {
@@ -61,12 +111,16 @@ class GoRouteInfused extends GoRoute {
     }
   }
 
-  static void _validateMiddleware(List<GoMiddleware> middleWares, BuildContext context, GoRouterState state) {
+  static void _validateMiddleware(
+    List<GoMiddleware> middleWares,
+    BuildContext context,
+    GoRouterState state,
+  ) {
     for (final i in middleWares) {
-      // ignore: invalid_use_of_protected_member
       final validationResult = i.validate(context, state);
       if (validationResult != null) {
-        if (validationResult.isValid == false && validationResult.canBeIgnored == false) {
+        if (validationResult.isValid == false && //
+            validationResult.canBeIgnored == false) {
           throw MiddlewareValidationResultException(
             validationResult,
             i,
