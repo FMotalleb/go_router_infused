@@ -1,39 +1,67 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+## background
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+this package was built as an extension on [go_router] ("https://pub.dev/packages/go_router")
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+currently in this version(0.0.1) it only implements middleware
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+since middlewares are not supported by default in this case an extended version of `GoRoute`
+is built (`GoRouteInfused`) that accepts middlewares
 
-## Features
+middlewares use [provider] ("https://pub.dev/packages/provider") to attach middleware's result to the context.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+its simple to migrate to `GoRouteInfused`,
+since it uses all parameters of `GoRoute`
 
-## Getting started
+<!-- even if you already have an extended version of `GoRoute` there is a constructor
+that receives a `GoRoute` and attach middlewares to it. -->
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## usecases
 
-## Usage
+* parsing models from route parameters
+* checking user authentication before changing route
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+## example
+
+model:
 
 ```dart
-const like = 'sample';
+class MyModel{
+    final String text;
+    const MyModel(this.text);
+    factory MyModel.fromParams(Map<String,String> params)=>MyModel(params['text']);
+}
 ```
 
-## Additional information
+middleware definition:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+/// [GoMiddlewareParamsParser] is a built-in middleware that parses parameters
+final myMiddleware = GoMiddlewareParamsParser<MyModel>(
+    parser:MyModel.fromParams,
+    canBeIgnored=true,
+);
+```
+
+route definition:
+
+```dart
+GoRouteInfused(
+    // currently you must provide parameters in path manually
+    path: "/path/to/route/:text",
+     builder:(context,state){
+        // there is a extension on `BuildContext` that checks existence of a provider
+        // its not efficient thu, you may need to create a method manually for this purpose.
+        if(context.hasProviderFor<MyModel>()){
+            final myInstance=context.read<MyModel>();
+            print(myInstance.text);
+        }
+        throw UnimplementedError();
+     },
+    middlewares = [
+        myMiddleware,
+    ],
+)
+```
+
+in this example if you go to route `/path/to/route/test_text`
+the result will be `test_text`.

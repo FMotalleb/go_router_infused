@@ -83,6 +83,7 @@ class GoRouteInfused extends GoRoute {
     String Function(String route)? pathResolver,
     bool testMiddlewareValidation = true,
   }) {
+    // todo change method
     String path = newPath ?? route.path;
     if (pathResolver != null) {
       path = pathResolver(path);
