@@ -65,7 +65,7 @@ class GoRouteInfused extends GoRoute {
         );
 
   /// alternatively instead of creating new route or migrating to
-  /// [GoRouteInfused] its possible to use [injectMiddle] to existing routes.
+  /// [GoRouteInfused] its possible to use [injectMiddle] on existing routes.
   ///
   /// @params:
   /// - [route] : (GoRoute) => normal [GoRoute]
