@@ -12,3 +12,6 @@ export 'package:go_router_infused/src/middleware/validation_result.dart';
 /// a built-in middleware that will parse the given params and generate a
 /// provider for the object
 export 'package:go_router_infused/src/middleware/built_in/params_parser.dart';
+
+/// extensions on context
+export 'package:go_router_infused/src/provider_tools/context_extensions.dart';

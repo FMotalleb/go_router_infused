@@ -7,7 +7,7 @@ extension ProviderContext on BuildContext {
     try {
       read<T>();
       return true;
-    } on ProviderNullException catch (_) {
+    } catch (_) {
       return false;
     }
   }

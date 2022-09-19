@@ -76,29 +76,29 @@ class GoRouteInfused extends GoRoute {
   ///   route
   ///
 
-  factory GoRouteInfused.injectMiddle({
-    required GoRoute route,
-    required List<GoMiddleware> middlewares,
-    String? newPath,
-    String Function(String route)? pathResolver,
-    bool testMiddlewareValidation = true,
-  }) {
-    // todo change method
-    String path = newPath ?? route.path;
-    if (pathResolver != null) {
-      path = pathResolver(path);
-    }
-    return GoRouteInfused(
-      builder: route.builder,
-      path: path,
-      middlewares: middlewares,
-      name: route.name,
-      pageBuilder: route.pageBuilder,
-      redirect: route.redirect,
-      routes: route.routes,
-      testMiddlewareValidation: testMiddlewareValidation,
-    );
-  }
+  // factory GoRouteInfused.injectMiddle({
+  //   required GoRoute route,
+  //   required List<GoMiddleware> middlewares,
+  //   String? newPath,
+  //   String Function(String route)? pathResolver,
+  //   bool testMiddlewareValidation = true,
+  // }) {
+  //   // todo change method
+  //   String path = newPath ?? route.path;
+  //   if (pathResolver != null) {
+  //     path = pathResolver(path);
+  //   }
+  //   return GoRouteInfused(
+  //     builder: route.builder,
+  //     path: path,
+  //     middlewares: middlewares,
+  //     name: route.name,
+  //     pageBuilder: route.pageBuilder,
+  //     redirect: route.redirect,
+  //     routes: route.routes,
+  //     testMiddlewareValidation: testMiddlewareValidation,
+  //   );
+  // }
   static Iterable<Provider> _generateProviders(
     List<GoMiddleware> middleWares,
     BuildContext context,
