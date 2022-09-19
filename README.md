@@ -1,13 +1,13 @@
 ## background
 
-this package was built as an extension on [go_router] ("https://pub.dev/packages/go_router")
+this package was built as an extension on [go_router]("https://pub.dev/packages/go_router")
 
 currently in this version(0.0.1) it only implements middleware
 
 since middlewares are not supported by default in this case an extended version of `GoRoute`
 is built (`GoRouteInfused`) that accepts middlewares
 
-middlewares use [provider] ("https://pub.dev/packages/provider") to attach middleware's result to the context.
+middlewares use [provider]("https://pub.dev/packages/provider") to attach middleware's result to the context.
 
 its simple to migrate to `GoRouteInfused`,
 since it uses all parameters of `GoRoute`
