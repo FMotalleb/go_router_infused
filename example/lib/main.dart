@@ -76,7 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: _nameController,
             ),
             TextButton.icon(
-                onPressed: reroute, icon: const Icon(Icons.navigate_next_outlined), label: const Text('navigate'))
+              onPressed: reroute,
+              icon: const Icon(Icons.navigate_next_outlined),
+              label: const Text('navigate'),
+            )
           ],
         ),
       ),

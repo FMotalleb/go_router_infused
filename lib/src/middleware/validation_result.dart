@@ -1,6 +1,8 @@
 library go_router_infused.middleware;
 
-import 'package:go_router_infused/src/middleware/middleware.dart' show GoMiddleware;
+import 'package:go_router_infused/src/middleware/middleware.dart' //
+    show
+        GoMiddleware;
 
 class MiddlewareValidationResult {
   final String? message;
@@ -25,7 +27,9 @@ canBeIgnored: $canBeIgnored
   }
 }
 
-class MiddlewareValidationResultException<T extends GoMiddleware> implements Exception {
+class MiddlewareValidationResultException<T extends GoMiddleware> //
+    implements
+        Exception {
   final MiddlewareValidationResult? validationResult;
   final T? sender;
   MiddlewareValidationResultException(

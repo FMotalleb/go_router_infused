@@ -54,7 +54,11 @@ class GoMiddlewareParamsParser<T extends Object> extends GoMiddleware<T> {
       return null;
     }
     final result = validator!(state.params);
-    return MiddlewareValidationResult(canBeIgnored: canBeIgnored, code: result ? 0 : 1, isValid: result);
+    return MiddlewareValidationResult(
+      canBeIgnored: canBeIgnored,
+      code: result ? 0 : 1,
+      isValid: result,
+    );
   }
 
   @override
