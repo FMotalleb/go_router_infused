@@ -11,4 +11,12 @@ extension ProviderContext on BuildContext {
       return false;
     }
   }
+
+  T? readOrNull<T>() {
+    try {
+      return read<T>();
+    } catch (e) {
+      return null;
+    }
+  }
 }
