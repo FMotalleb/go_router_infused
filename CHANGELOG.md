@@ -1,3 +1,7 @@
+## 0.1.0
+
+* [release] stable 0.1.0
+
 ## 0.0.6
 
 * [Format] matching `flutter format .`
