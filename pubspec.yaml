@@ -1,6 +1,6 @@
 name: go_router_infused
-description: extension on `go_router`
-version: 0.0.6
+description: extending route in `GoRoute` to accept middleware
+version: 0.1.0
 homepage: https://github.com/FMotalleb/go_router_infused
 
 environment:
