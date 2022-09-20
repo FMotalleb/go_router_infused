@@ -1,9 +1,17 @@
+## 0.0.4
+
+* [Feat] add readOrNull extension on `BuildContext`
+
+## 0.0.3
+
+* [Minor,Docs]
+
 ## 0.0.2
 
-* Fix: fixed extension
-* Rem: removed a named constructor of [GoRouteInfused]
-* Example: added
+* [Fix]: fixed extension
+* [Rem]: removed a named constructor of [GoRouteInfused]
+* [Example]: added
 
 ## 0.0.1
 
-* initial release.
+* [Init] initial release.
