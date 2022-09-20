@@ -37,9 +37,9 @@ class GoRouteInfused extends GoRoute {
     super.routes,
     String? Function(GoRouterState)? redirect,
   }) : super(
-          redirect: (state) {
+          redirect: (context, state) {
             for (final i in middlewares) {
-              final redirectResult = i.redirect(state);
+              final redirectResult = i.redirect(context, state);
               if (redirectResult != null) {
                 return redirectResult;
               }

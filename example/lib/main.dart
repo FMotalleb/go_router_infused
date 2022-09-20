@@ -9,7 +9,6 @@ void main() {
 
 final router = GoRouter(
   routerNeglect: true,
-  urlPathStrategy: UrlPathStrategy.path,
   initialLocation: '/example/initial',
   routes: [
     GoRouteInfused(

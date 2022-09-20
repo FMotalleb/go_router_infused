@@ -1,6 +1,6 @@
 name: go_router_infused
-description: extending route in `GoRoute` to accept middleware
-version: 0.1.0
+description: extending route in `GoRoute` to accept middleware that injects dependency using provider
+version: 0.2.0
 homepage: https://github.com/FMotalleb/go_router_infused
 
 environment:
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^4.3.0
+  go_router: ^5.0.0
   provider: ^6.0.3
 dev_dependencies:
   flutter_test:

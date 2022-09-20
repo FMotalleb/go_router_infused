@@ -34,5 +34,5 @@ abstract class GoMiddleware<T extends Object> {
   ///
   /// for example this can be used to handle user authentications and
   /// permissions
-  String? redirect(GoRouterState state) => null;
+  String? redirect(BuildContext context, GoRouterState state) => null;
 }
