@@ -1,7 +1,7 @@
 name: go_router_infused
-description: extension on [go_router]("https://pub.dev/packages/go_router")
-version: 0.0.4
-homepage: https://hemend.com
+description: extension on [go_router](https://pub.dev/packages/go_router)
+version: 0.0.5
+homepage: https://github.com/FMotalleb/go_router_infused
 
 environment:
   sdk: ">=2.18.0 <3.0.0"

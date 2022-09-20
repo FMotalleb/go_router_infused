@@ -1,3 +1,7 @@
+## 0.0.5
+
+* [Minor]
+
 ## 0.0.4
 
 * [Feat] add readOrNull extension on `BuildContext`
