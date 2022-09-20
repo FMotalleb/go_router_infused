@@ -1,3 +1,7 @@
+## 0.2.0
+
+* [Dep] updated go router to support ^5.0.0
+
 ## 0.1.0
 
 * [release] stable 0.1.0
